@@ -29,7 +29,7 @@ What words are most common, and how do they change month to month?
 1. After settling on Common Crawl, we began looking at the cc-pyspark directory
 2. Tyson and Hauss began following a blog that showed how to work with the data
 3. Chris began using the word_count.py file to explore ways toward td-idf
-4. We hoped to continue until convergence, but . . . 
+4. We hoped to continue until convergence, but . . .
 
 #### Starting Local
 
@@ -63,6 +63,23 @@ Run python script and pipe results to bucket
 **Permission Errors!**
 
 <img alt="intro" src="img/error.png" width='500'>
+
+### More Cloud Errors
+
+Initial issues slowed down the start (failed keys, etc.).
+
+We were able to load week 2017-4 of Common Crawl data from s3 onto the server for processing.
+
+Using spark-submit ran the script.
+
+***ISSUE:*** Pyspark command line started but failed in the Python script.
+***TRIED:*** Installing Anaconda
+***SOLVED:*** Script required specific modules called out to work.
+
+***ISSUE:*** Python script ran but not results were returned to the parquet db
+***CHECKED:*** ps aux|head -10 or top to see processes
+***ATTEMPTED:*** Spark web interface (ssh to port 8157 hung + Firefox proxy instructions were out of date)
+***ATTEMPTED:*** No tables were returned in spark-sql 
 
 #### References
 * [Common Crawl](http://commoncrawl.org/)

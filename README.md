@@ -19,20 +19,23 @@ The Common Crawl is a non-profit organization that uses web crawlers to index th
 
 * Files types : .warc, .wet, .wat . . .what?: Data are stored in .warc files, which are a combination of .wet and .wat files.  .wat files contained meta data about each website, and .wet files contain the *extracted text* from each webpage.
 
-#### Question
+#### Questions
 
 What servers served the most pages?
-What words are most common?
+What words are most common, and how do they change month to month?
 
+#### Approach
 
-|             |                 Spark                |                           Hadoop                          |
-|:-----------:|:------------------------------------:|:---------------------------------------------------------:|
-|  Filesystem |                  Any                 |                         HDFS only                         |
-|    Speed    | Much faster, but uses lots of memory | writes things to local after each step, slows things down |
-| Reliability |   Getting better, but a little bug   |                 Very reliable because OLD                 |
+1. After settling on Common Crawl, we began looking at the cc-pyspark directory
+2. Tyson and Hauss began following a blog that showed how to work with the data
+3. Chris began using the word_count.py file to explore ways toward td-idf
+4. We hoped to continue until convergence, but . . . 
 
+#### Starting Local
 
-Locally, were extracted counts of pages served by several servers using the server_count.py script.
+Locally, were extracted counts of pages served by several servers using the server_count.py script and the TF and DF using word_count.py.
+
+**Server Counts**
 
 |   Server    |   Pages Served       |
 |:-----------:|:------------------------------------:|
@@ -47,7 +50,20 @@ Locally, were extracted counts of pages served by several servers using the serv
 'nginx/1.10.3' | 646
 'Apache/2.2.15 (CentOS)' | 620
 
+**Term/Document Frequencies**
+
+<img alt="intro" src="img/tf_idf.png" width='500'>
+
+#### Running on the Cloud
+
+Run python script and pipe results to bucket
+
+<img alt="intro" src="img/command.png" width='500'>
+
+**Permission Errors!**
+
+<img alt="intro" src="img/error.png" width='500'>
 
 #### References
 * [Common Crawl](http://commoncrawl.org/)
-* [*Analyzing Petabytes of Websites*](http://tech.marksblogg.com/petabytes-of-website-data-spark-emr.html) - Mark Litwintschik 
+* [*Analyzing Petabytes of Websites*](http://tech.marksblogg.com/petabytes-of-website-data-spark-emr.html) - Mark Litwintschik
